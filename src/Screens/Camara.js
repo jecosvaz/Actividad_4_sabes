@@ -1,16 +1,19 @@
 import * as React from 'react';
-import { useState,useEffect } from 'react';
-import { View, Text, SafeAreaView,StyleSheet,TouchableOpacity} from 'react-native';
+import { useState,useEffect,useRef } from 'react';
+import { View, Text,StyleSheet,TouchableOpacity,Modal, Image} from 'react-native';
 import { Camera, Constants } from 'expo-camera'
-
-
+import { Entypo } from '@expo/vector-icons';
 
 const camara = () => {
     //Constante para poder usar la camara
     const[type, setType]=useState(Camera.Constants.Type.front)
     //permisos para usar la camara
     const [hasPermission, setHasPermission] = useState(null);
-
+    //constante para capturar la imagen de la camara
+    const camRef = useRef(null);
+    const [photo, setPhoto] = useState(null);
+    const [open, setOpen] = useState(null);
+ 
     useEffect(()=>{
       (async ()=> {
         const {status } = await Camera.requestCameraPermissionsAsync();
@@ -23,12 +26,21 @@ const camara = () => {
     }
     else if (hasPermission === false){
       <Text>Se requiere el acceso a la camara</Text>;
-    } 
+    }
+    //funcion asyc para poder tomar la fotografia
+    async function takePiture(){
+      if (camRef){
+        const data = await camRef.current.takePitureAsync();
+        console.log(data);
+      }
+    }
+
     //pinta la camara   
     return (
       <View style={styles.container}>
       <Camera style={styles.camera} type={type}>
         <View style={styles.buttonContainer}>
+    {/* boton para cambiar de camara */}
           <TouchableOpacity
             style={styles.button}
             onPress={() => {
@@ -38,22 +50,20 @@ const camara = () => {
                   : Camera.Constants.Type.back
               );
             }}>
-            <Text style={styles.text}> Flip </Text>
+            <Text style={styles.text}> Cambiar </Text>
+          </TouchableOpacity>
+
+          {/*boton para tomar la imagen */}
+          <TouchableOpacity styles={styles.btnPhoto}>
+            <Entypo name="camera" size={45} color="black" />
           </TouchableOpacity>
         </View>
       </Camera>
     </View>   
-    
-    
-      /*<SafeAreaView style={styles.container}>
-        < Camera style ={{flex:1}}>        
-        </Camera>
-        </SafeAreaView>*/
-        
+                 
         );
   } 
- //Estilos
- 
+ //Estilos 
  const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -74,21 +84,20 @@ const camara = () => {
   },
   text: {
     fontSize: 18,
-    color: 'white',
+    color: 'yellow',
+  },
+  btnPhoto:{
+    position: 'absolute',
+    right: 20,
+    backgroundColor:'yellow',
+    width: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 15,
+    bottom: 10,
+
   },
 });
  
- /*const styles = StyleSheet.create({
-    container: { flex: 1, 
-                 justifyContent:'center',
-                 paddingTop: Constants.AutoFocus,
-                 backgroundColor:'black',
-                 padding:8,
-               },
-    
-  });*/
-
-    
-    
-
+ 
 export default camara
