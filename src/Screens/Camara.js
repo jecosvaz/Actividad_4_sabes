@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useState,useEffect,useRef } from 'react';
 import { View, Text,StyleSheet,TouchableOpacity,Modal, Image} from 'react-native';
 import { Camera, Constants } from 'expo-camera'
-import { Entypo } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 
 const camara = () => {
     //Constante para poder usar la camara
@@ -28,9 +28,9 @@ const camara = () => {
       <Text>Se requiere el acceso a la camara</Text>;
     }
     //funcion asyc para poder tomar la fotografia
-    async function takePiture(){
+    async function takePicture(){
       if (camRef){
-        const data = await camRef.current.takePitureAsync();
+        const data = await camRef.current.takePictureAsync();
         console.log(data);
       }
     }
@@ -38,24 +38,27 @@ const camara = () => {
     //pinta la camara   
     return (
       <View style={styles.container}>
-      <Camera style={styles.camera} type={type}>
+      <Camera 
+      style={styles.camera} 
+      type={type} 
+      ref={camRef}>
         <View style={styles.buttonContainer}>
-    {/* boton para cambiar de camara */}
-          <TouchableOpacity
-            style={styles.button}
+   
+    
+          <TouchableOpacity style ={styles.btnCambiar}
             onPress={() => {
               setType(
                 type === Camera.Constants.Type.back
                   ? Camera.Constants.Type.front
                   : Camera.Constants.Type.back
               );
-            }}>
-            <Text style={styles.text}> Cambiar </Text>
+            }}>             
+             <Ionicons name="md-camera-reverse" size={30} color="black" />
           </TouchableOpacity>
 
-          {/*boton para tomar la imagen */}
-          <TouchableOpacity styles={styles.btnPhoto}>
-            <Entypo name="camera" size={45} color="black" />
+          
+          <TouchableOpacity style={styles.btnPhoto} onPress ={()=>{takePicture()}}>
+          <Ionicons name="camera" size={30} color="black" />
           </TouchableOpacity>
         </View>
       </Camera>
@@ -77,10 +80,17 @@ const camara = () => {
     flexDirection: 'row',
     margin: 20,
   },
-  button: {
+  btnCambiar: {    
+    backgroundColor:'yellow',
+    position: 'absolute',
     flex: 0.1,
     alignSelf: 'flex-end',
     alignItems: 'center',
+    width: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 15,
+    bottom: 20,
   },
   text: {
     fontSize: 18,
@@ -88,13 +98,13 @@ const camara = () => {
   },
   btnPhoto:{
     position: 'absolute',
-    right: 20,
+    right: 5,
     backgroundColor:'yellow',
     width: 50,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 15,
-    bottom: 10,
+    bottom: 20,
 
   },
 });
