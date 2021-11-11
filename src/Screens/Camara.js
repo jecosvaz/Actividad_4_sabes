@@ -32,6 +32,8 @@ const camara = () => {
       if (camRef){
         const data = await camRef.current.takePictureAsync();
         console.log(data);
+        setPhoto(data.uri);
+        setOpen(true);
       }
     }
 
@@ -44,7 +46,7 @@ const camara = () => {
       ref={camRef}>
         <View style={styles.buttonContainer}>
    
-    
+          {/* boton de cambiar camara */}
           <TouchableOpacity style ={styles.btnCambiar}
             onPress={() => {
               setType(
@@ -56,10 +58,30 @@ const camara = () => {
              <Ionicons name="md-camera-reverse" size={30} color="black" />
           </TouchableOpacity>
 
-          
+          {/* boton de tomar foto */}
           <TouchableOpacity style={styles.btnPhoto} onPress ={()=>{takePicture()}}>
           <Ionicons name="camera" size={30} color="black" />
           </TouchableOpacity>
+
+          {/* funcion para tomar foto */}
+          {
+          photo &&
+          <Modal
+           animationType='slide'
+           transparent ={false}
+           visible ={open}
+           >
+          <View style={styles.photoContainer}>
+            <TouchableOpacity onPress ={()=> setOpen(false)}>
+            <Ionicons name="close-circle" size={35} color="red" />
+            </TouchableOpacity>
+            <Image
+            style = {styles.photo}
+            source= {{uri: photo}}
+            />
+          </View>
+          </Modal>
+          }
         </View>
       </Camera>
     </View>   
@@ -105,7 +127,16 @@ const camara = () => {
     alignItems: 'center',
     borderRadius: 15,
     bottom: 20,
-
+   },
+  photo:{
+    width: '100%',
+    height: 350,
+  },
+  photoContainer:{
+    flex:1,
+    justifyContent:'center',
+    alignItems:'center',
+    margin:10,
   },
 });
  
