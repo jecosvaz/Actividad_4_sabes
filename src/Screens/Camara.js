@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useState,useEffect,useRef } from 'react';
 import { View, Text,StyleSheet,TouchableOpacity,Modal, Image} from 'react-native';
-import { Camera, Constants } from 'expo-camera'
+import { Camera, Constants } from 'expo-camera';
 import { Ionicons } from '@expo/vector-icons';
 
 const camara = () => {
@@ -60,7 +60,7 @@ const camara = () => {
 
           {/* boton de tomar foto */}
           <TouchableOpacity style={styles.btnPhoto} onPress ={()=>{takePicture()}}>
-          <Ionicons name="camera" size={30} color="black" />
+            <Ionicons name="camera" size={30} color="black" />
           </TouchableOpacity>
 
           {/* funcion para tomar foto */}
@@ -71,6 +71,7 @@ const camara = () => {
            transparent ={false}
            visible ={open}
            >
+          {/* Modal de fotografia tomada */}
           <View style={styles.photoContainer}>
             <TouchableOpacity onPress ={()=> setOpen(false)}>
             <Ionicons name="close-circle" size={35} color="red" />

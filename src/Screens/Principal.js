@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet,View, Text, Image,Button } from 'react-native'
+import { StyleSheet,View, Text, Image,Button, TouchableOpacity } from 'react-native'
 import { useNavigation } from '@react-navigation/core';
 
 const Principal = () => {
@@ -15,6 +15,11 @@ const Principal = () => {
               color="#841584"
               accessibilityLabel="Learn more about this purple button"
               />
+              <TouchableOpacityBase>
+                  <Text style ={style.btnCamara}>
+                      Camara
+                  </Text>
+              </TouchableOpacityBase>
         </View>
        
         
@@ -26,6 +31,12 @@ const style = StyleSheet.create({
         flex:1,
         alignItems:'center'},
     title:{fontSize:30,},
+    btnCamara:{ backgroundColor:'White',
+    flex:1,
+    alignItems:'center',
+    fontSize: 18,
+
+    },
 
 });
 
