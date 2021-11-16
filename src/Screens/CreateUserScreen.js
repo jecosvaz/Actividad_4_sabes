@@ -1,5 +1,6 @@
 import React,{useState} from 'react'
 import { View, Button, TextInput, ScrollView, StyleSheet } from 'react-native'
+import firebase from '../../DataBase/firebase';
 
 const CreateUserScreen = () => {
     //Guarda los estados de los textinputs
@@ -14,6 +15,28 @@ const CreateUserScreen = () => {
     const handleChangeText = (name, value) =>{
         setState({ ...state,[name]: value});
     };
+
+    //Guarda los datos en firebase
+        const saveNewUser= async () => {
+            if(state.name === ''){
+                alert('Por favor llena los campos')
+            } else {
+                try {
+                    await firebase.db.collection('users').add({
+                        name: state.name,
+                        email: state.email,
+                        phone: state.phone,
+                        address: state.address,
+                    })
+                alert('Datos guardados'); 
+                    
+                } catch (error) {
+                    console.error('Error de captura')
+                }                       
+            }
+        }
+        
+    
     //Pinta el formulario
     return (
      <ScrollView style={styles.container}>
@@ -34,7 +57,7 @@ const CreateUserScreen = () => {
              onChangeText={(value)=> handleChangeText( 'address', value)}/>
          </View> 
          <View>
-             <Button title='Guardar' onPress={() => console.log(state)}/>
+             <Button title='Guardar' onPress={() => saveNewUser()}/>
          </View>
      </ScrollView>
     )
