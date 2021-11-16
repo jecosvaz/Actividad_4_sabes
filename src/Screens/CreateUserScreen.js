@@ -2,7 +2,7 @@ import React,{useState} from 'react'
 import { View, Button, TextInput, ScrollView, StyleSheet } from 'react-native'
 import firebase from '../../DataBase/firebase';
 
-const CreateUserScreen = () => {
+const CreateUserScreen = (props) => {
     //Guarda los estados de los textinputs
     const[state,setState]=useState({
         name: "",
@@ -28,10 +28,10 @@ const CreateUserScreen = () => {
                         phone: state.phone,
                         address: state.address,
                     })
-                alert('Datos guardados'); 
+                props.navigation.navigate('ScreenUserList'); 
                     
                 } catch (error) {
-                    console.error('Error de captura')
+                    console.error('Error de captura');
                 }                       
             }
         }
