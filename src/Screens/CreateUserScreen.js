@@ -35,8 +35,7 @@ const CreateUserScreen = (props) => {
                 }                       
             }
         }
-        
-    
+            
     //Pinta el formulario
     return (
      <ScrollView style={styles.container}>
