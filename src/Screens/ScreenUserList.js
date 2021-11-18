@@ -40,7 +40,9 @@ const ScreenUserList = (props) => {
                     <ListItem
                         key={user.id}
                         bottomDivider
-                        onPress={()=> alert(user.id)}
+                        onPress={()=> props.navigation.navigate('UserDetailsScreen',{
+                            userId: user.id
+                        })}
                     >
                       <ListItem.Chevron/>
                       <Avatar 

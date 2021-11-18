@@ -15,11 +15,11 @@ const Principal = () => {
               color="#841584"
               accessibilityLabel="Learn more about this purple button"
               />
-              <TouchableOpacityBase>
+              {/* <TouchableOpacityBase>
                   <Text style ={style.btnCamara}>
                       Camara
-                  </Text>
-              </TouchableOpacityBase>
+                  </Text> */}
+              {/* </TouchableOpacityBase> */}
         </View>
        
         

@@ -7,7 +7,7 @@ import HomeStackScreen from './src/Stacks/HomeStackScreen';
 
 export default function App(){
  return(
-  //  <HomeStackScreen/>
+    //<HomeStackScreen/>
   <DirectoryStackScreen/>
  )
 
