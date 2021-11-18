@@ -3,14 +3,14 @@ import { View, Button, TextInput, ScrollView, StyleSheet, ActivityIndicator,Aler
 import firebase from '../../DataBase/firebase'
 
 const UserDetailsScreen = (props) => {
-
-    const [user, setUser] = useState({
+    const initialState={
         id:'',
         name: '',
         mail: '',
         phone:'',
         address: ''
-    });
+    }
+    const [user, setUser] = useState();
     const [loading, setLoading] = useState(true);
 
     //Realizamos la consulta a la base de datos para extraer los datos
@@ -38,6 +38,18 @@ const UserDetailsScreen = (props) => {
         await dbRef.delete();
         props.navigation.navigate('ScreenUserList');
     };
+
+    const updateUser = async() =>{
+        const dbRef = firebase.db.collection('users').doc(user.id);
+        await dbRef.set({
+            name: user.name,
+            email: user.email,
+            phone: user.phone,
+            address: user.address
+        });
+        setUser({initialState})
+        props.navigation.navigate('ScreenUserList');
+    }
 
     const openConfirmationAlert = () => {
         Alert.alert(
@@ -86,7 +98,7 @@ const UserDetailsScreen = (props) => {
         <View>
             <Button 
             color='#9CCC65'
-            title='Actualizar contacto' onPress={() => alert('works')}/>
+            title='Actualizar contacto' onPress={() => updateUser()}/>
         </View>
         <View>
             <Button 

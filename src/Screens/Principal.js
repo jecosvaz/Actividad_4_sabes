@@ -31,7 +31,7 @@ const style = StyleSheet.create({
         flex:1,
         alignItems:'center'},
     title:{fontSize:30,},
-    btnCamara:{ backgroundColor:'White',
+    btnCamara:{ backgroundColor:'#FFFFFF',
     flex:1,
     alignItems:'center',
     fontSize: 18,
