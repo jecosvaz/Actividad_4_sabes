@@ -10,9 +10,9 @@ const HomeStackScreen = () => {
     const HomeStack = createNativeStackNavigator();
     return (
         <HomeStack.Navigator >
-                <HomeStack.Screen  name='Login' component={Login} options={{ title: false }} />
+                <HomeStack.Screen  name='Login' component={Login} options={{ title: '' }} />
                 <HomeStack.Screen name='Principal' component={Principal} options={{ title: 'Bienvenido' }}/>
-                <HomeStack.Screen name='Camara' component={Camara} options={{ title: false }}/>
+                <HomeStack.Screen name='Camara' component={Camara} options={{ title: '' }}/>
             </HomeStack.Navigator>
     )
         

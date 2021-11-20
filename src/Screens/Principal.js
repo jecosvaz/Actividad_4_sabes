@@ -62,7 +62,7 @@ const style = StyleSheet.create({
         fontSize: 18,
     },
     MarginButton: {
-        displayflex: 1,
+        flex: 1,
         alignItems: 'center'
         , marginTop: 15,
         borderBottomEndRadius: 35,
